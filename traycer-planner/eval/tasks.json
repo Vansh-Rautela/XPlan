@@ -1,0 +1,42 @@
+{
+  "repo": "tests/fixtures/sample-app",
+  "tasks": [
+    {
+      "id": "email-validation",
+      "goal": "Validate email format when creating a user and return 400 for invalid emails",
+      "expected": ["src/utils/validation.ts", "src/routes/users.ts"],
+      "forbidden": ["src/routes/health.ts", "src/db/client.ts", "src/config.ts"]
+    },
+    {
+      "id": "pagination",
+      "goal": "Add pagination (limit and offset query parameters) to the list users endpoint",
+      "expected": ["src/routes/users.ts", "src/services/userService.ts"],
+      "forbidden": ["src/routes/health.ts", "src/middleware/requestLogger.ts", "src/config.ts"]
+    },
+    {
+      "id": "soft-delete",
+      "goal": "Make deleting a user a soft delete that keeps the record but hides it from listings",
+      "expected": ["src/services/userService.ts", "src/db/client.ts"],
+      "forbidden": ["src/routes/health.ts", "src/config.ts", "src/middleware/requestLogger.ts"]
+    },
+    {
+      "id": "configurable-port-loglevel",
+      "goal": "Make the server port and the request log level configurable through environment variables",
+      "expected": ["src/config.ts", "src/middleware/requestLogger.ts"],
+      "forbidden": ["src/services/userService.ts", "src/db/client.ts", "src/routes/health.ts"]
+    },
+    {
+      "id": "rate-limiting",
+      "goal": "Add rate limiting so a client can make at most 100 requests per minute to the API",
+      "expected": ["src/server.ts"],
+      "expectCreateUnder": "src/middleware/",
+      "forbidden": ["src/db/client.ts", "src/services/userService.ts", "src/utils/validation.ts"]
+    },
+    {
+      "id": "health-db-status",
+      "goal": "Make the health check endpoint report how many users are stored in the database",
+      "expected": ["src/routes/health.ts"],
+      "forbidden": ["src/routes/users.ts", "src/middleware/requestLogger.ts", "src/config.ts"]
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+# Plan: Implement soft deletion for user records by marking them as deleted without physically removing them from the database.
+
+> **Status:** ✅ Validated — automated checks and reviewer found no blocking issues  
+> **Goal:** Make deleting a user a soft delete that keeps the record but hides it from listings  
+> **Repository:** `tests/fixtures/sample-app` · **Model:** ollama/qwen2.5:7b-instruct · **Review rounds:** 1 · **LLM calls:** 5
+
+## Scope
+This plan focuses on modifying src/services/userService.ts and src/routes/users.ts to support soft deletion. No UI or notifications are updated, in line with out-of-scope requirements.
+
+## Requirements
+
+- **R1** The `UserService` should provide a method to mark a user as deleted.
+- **R2** When a user is soft-deleted, their `deletedAt` field should be set to the current timestamp.
+
+**Acceptance criteria**
+- Calling the delete method on the UserService for a specific user updates their `deletedAt` field.
+- The deleted user's record remains in the database but is not returned by any listing queries.
+
+**Constraints**
+- Soft deletion should only be applied to users, not other entities like posts or comments.
+
+**Out of scope**
+- Hard deletion of user records
+- Updating UI or notifications for deleted users
+
+## Assumptions
+- The `UserService` has access to the necessary database operations and fields.
+
+## Tasks
+
+Execution order: T1 → T2
+
+### T1. Add soft delete functionality to UserService
+
+_No dependencies · Covers: R1, R2_
+
+Modify the `UserService` to support marking users as deleted by setting their `deletedAt` field.
+
+**Why:** The existing `deleteUser` method only removes records, which does not satisfy the requirement for soft deletion. Adding a new method will allow us to mark users as deleted without removing them from the database.
+
+**Files**
+- `src/services/userService.ts` (modify, exists) — `deleteUser`, `UserService`
+  Add `softDeleteUser` and update `deleteUser` to mark users as deleted.
+
+**Tests**
+- src/services/userService.ts: should update the user's deletedAt field when softDeleting a user
+- tests/userService.test.ts: should test that softDeleted users are not returned by listUsers
+
+**Done when**
+- Calling the `softDeleteUser` method on the UserService for a specific user updates their `deletedAt` field.
+- The deleted user's record remains in the database but is not returned by any listing queries.
+
+### T2. Update usersRouter to use soft delete
+
+_Depends on: T1 · Covers: R1, R2_
+
+Modify the `usersRouter` to call the new `softDeleteUser` method from UserService.
+
+**Why:** The existing `deleteUser` endpoint only removes records, which does not satisfy the requirement for soft deletion. Updating this endpoint will ensure that soft deletion is used instead.
+
+**Files**
+- `src/routes/users.ts` (modify, exists) — `usersRouter`, `deleteUser`
+  Replace `deleteUser` with `softDeleteUser` in the delete route.
+
+**Tests**
+- src/routes/users.ts: should test that softDeleted users are not returned by listUsers
+
+**Done when**
+- The `usersRouter` uses the new `softDeleteUser` method from UserService.
+
+**Verify with:** `npm test`
+
+## Risks
+
+- Potential bugs in the implementation of `softDeleteUser` could lead to incorrect soft deletion.
+  - Mitigation: Thoroughly test the `softDeleteUser` method and its integration with other parts of the application.
+- The existing tests might not cover all edge cases for soft deletion, leading to potential regressions.
+  - Mitigation: Review and update existing tests to ensure they cover all relevant scenarios.
+
+## Open questions
+- How should soft-deleted users be excluded from listing queries?
+
+## Review
+
+- Round 1: verdict **approve**, 0 blocking, 0 minor
+
+The plan effectively implements soft deletion for user records by modifying the `UserService` and updating the `usersRouter`. The scope is appropriate, and all tasks are well-defined with clear dependencies.
+
+## Context used
+
+- `src/services/userService.ts` — selected by Creator; path matches "user", "servic"; defines listUsers, findUserByEmail, createUser, …; mentions "delet" ×2, "user" ×17, "record" ×5; imports src/db/client.ts
+- `src/routes/users.ts` — selected by Creator; path matches "user"; defines usersRouter; mentions "delet" ×3, "user" ×11, "servic" ×2; imports src/services/userService.ts
+- `src/db/client.ts` — selected by Creator; defines UserRecord; mentions "user" ×4, "record" ×2; imported by src/services/userService.ts
+- `tests/userService.test.ts` — path matches "user", "servic"; mentions "delet" ×3, "user" ×13, "servic" ×2; imports 2 matching files (src/services/userService.ts, src/db/client.ts)
+- `src/server.ts` — mentions "user" ×4; imports src/routes/users.ts
+- `src/utils/validation.ts` — imported by src/routes/users.ts
+- `README.md` — mentions "user" ×1
+- `src/config.ts` — imported by src/server.ts
+
+Tool calls during exploration: search_code("deleteUser", "src/**"), read_file("src/routes/users.ts", 1, 25)
+
+---
+_Generated by XPlan at 2026-10-26T17:03:13.592Z. This is a plan, not verified code: file facts were checked against the repository; everything else is model output._

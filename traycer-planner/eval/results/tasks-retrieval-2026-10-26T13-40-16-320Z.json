@@ -1,0 +1,54 @@
+{
+  "provider": null,
+  "seed": 7,
+  "rows": [
+    {
+      "id": "email-validation",
+      "recallInContext": 1,
+      "recallTop3": 1,
+      "contextFiles": 7,
+      "forbiddenInContext": 1,
+      "missed": []
+    },
+    {
+      "id": "pagination",
+      "recallInContext": 1,
+      "recallTop3": 1,
+      "contextFiles": 8,
+      "forbiddenInContext": 2,
+      "missed": []
+    },
+    {
+      "id": "soft-delete",
+      "recallInContext": 1,
+      "recallTop3": 1,
+      "contextFiles": 8,
+      "forbiddenInContext": 1,
+      "missed": []
+    },
+    {
+      "id": "configurable-port-loglevel",
+      "recallInContext": 1,
+      "recallTop3": 0.5,
+      "contextFiles": 8,
+      "forbiddenInContext": 2,
+      "missed": []
+    },
+    {
+      "id": "rate-limiting",
+      "recallInContext": 1,
+      "recallTop3": 1,
+      "contextFiles": 8,
+      "forbiddenInContext": 2,
+      "missed": []
+    },
+    {
+      "id": "health-db-status",
+      "recallInContext": 1,
+      "recallTop3": 1,
+      "contextFiles": 8,
+      "forbiddenInContext": 1,
+      "missed": []
+    }
+  ]
+}

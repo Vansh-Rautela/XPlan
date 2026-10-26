@@ -1,0 +1,26 @@
+Full evaluation with ollama/qwen2.5:7b-instruct (seed 7, 6 task(s))
+
+email-validation: validated · recall 50% · forbidden 0 · 5 calls · 118s
+pagination: validated · recall 100% · forbidden 0 · 5 calls · 154s
+⚠ Revision limit (1) reached with 4 unresolved finding(s).
+soft-delete: unresolved · recall 100% · forbidden 0 · 7 calls · 444s
+configurable-port-loglevel: validated · recall 50% · forbidden 0 · 7 calls · 381s
+⚠ Revision limit (1) reached with 1 unresolved finding(s).
+rate-limiting: unresolved · recall 100% · forbidden 0 · 7 calls · 499s
+⚠ Revision limit (1) reached with 2 unresolved finding(s).
+health-db-status: unresolved · recall 100% · forbidden 0 · 7 calls · 266s
+
+┌─────────┬──────────────────────────────┬──────────────┬────────┬───────────┬─────────────┬────────────┬────────┬───────┬─────┬────────────┬────────────┐
+│ (index) │ task                         │ status       │ recall │ forbidden │ new file ok │ tests/task │ rounds │ calls │ s   │ downgraded │ early stop │
+├─────────┼──────────────────────────────┼──────────────┼────────┼───────────┼─────────────┼────────────┼────────┼───────┼─────┼────────────┼────────────┤
+│ 0       │ 'email-validation'           │ 'validated'  │ '50%'  │ 0         │ '-'         │ true       │ 1      │ 5     │ 118 │ 0          │ false      │
+│ 1       │ 'pagination'                 │ 'validated'  │ '100%' │ 0         │ '-'         │ true       │ 1      │ 5     │ 154 │ 0          │ false      │
+│ 2       │ 'soft-delete'                │ 'unresolved' │ '100%' │ 0         │ '-'         │ true       │ 2      │ 7     │ 444 │ 0          │ false      │
+│ 3       │ 'configurable-port-loglevel' │ 'validated'  │ '50%'  │ 0         │ '-'         │ true       │ 2      │ 7     │ 381 │ 0          │ false      │
+│ 4       │ 'rate-limiting'              │ 'unresolved' │ '100%' │ 0         │ true        │ true       │ 2      │ 7     │ 499 │ 0          │ false      │
+│ 5       │ 'health-db-status'           │ 'unresolved' │ '100%' │ 0         │ '-'         │ true       │ 2      │ 7     │ 266 │ 0          │ false      │
+└─────────┴──────────────────────────────┴──────────────┴────────┴───────────┴─────────────┴────────────┴────────┴───────┴─────┴────────────┴────────────┘
+Completed 6/6 · mean recall 83% · mean forbidden files 0.00 · validated 3/6
+
+Saved eval/results/tasks-ollama-qwen2.5_7b-instruct-2026-10-26T17-34-15-556Z.json
+eval exit=0

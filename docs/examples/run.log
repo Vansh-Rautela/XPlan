@@ -1,0 +1,15 @@
+Provider: ollama/qwen2.5:7b-instruct at http://127.0.0.1:11434 (auto-selected; override with --provider) — runs locally; code stays on this machine.
+› Indexed 12 files in tests/fixtures/sample-app (12 readable, 0 sensitive withheld, 0 ignored, 0 symlinks skipped)
+› Creator: interpreting the goal (ollama/qwen2.5:7b-instruct)
+  2 requirement(s), 1 open question(s)
+› Context: 8 file(s), 3,456 chars, 2 more ranked file(s) left out
+› Explorer: up to 2 tool step(s)
+  2 tool call(s)
+› Planner: drafting the plan
+› Reviewer: round 1 (0 automated finding(s))
+  0 blocking, 0 minor finding(s) — reviewer verdict: approve
+Wrote ../docs/examples/soft-delete.json
+
+Status: validated
+2 task(s), 2 file(s), 0 unresolved and 0 minor finding(s)
+5 LLM call(s) in 157.8s, ~8,624 input / 1,171 output tokens

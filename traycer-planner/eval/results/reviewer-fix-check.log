@@ -1,0 +1,20 @@
+Full evaluation with ollama/qwen2.5:7b-instruct (seed 7, 3 task(s))
+
+⚠ Revision limit (1) reached with 5 unresolved finding(s).
+soft-delete: unresolved · recall 100% · forbidden 0 · 7 calls · 417s
+⚠ Revision limit (1) reached with 2 unresolved finding(s).
+rate-limiting: unresolved · recall 100% · forbidden 0 · 7 calls · 458s
+⚠ Revision limit (1) reached with 2 unresolved finding(s).
+health-db-status: unresolved · recall 100% · forbidden 0 · 7 calls · 275s
+
+┌─────────┬────────────────────┬──────────────┬────────┬───────────┬─────────────┬────────────┬────────┬───────┬─────┬────────────┬────────────┐
+│ (index) │ task               │ status       │ recall │ forbidden │ new file ok │ tests/task │ rounds │ calls │ s   │ downgraded │ early stop │
+├─────────┼────────────────────┼──────────────┼────────┼───────────┼─────────────┼────────────┼────────┼───────┼─────┼────────────┼────────────┤
+│ 0       │ 'soft-delete'      │ 'unresolved' │ '100%' │ 0         │ '-'         │ true       │ 2      │ 7     │ 417 │ 0          │ false      │
+│ 1       │ 'rate-limiting'    │ 'unresolved' │ '100%' │ 0         │ true        │ true       │ 2      │ 7     │ 458 │ 0          │ false      │
+│ 2       │ 'health-db-status' │ 'unresolved' │ '100%' │ 0         │ '-'         │ true       │ 2      │ 7     │ 275 │ 0          │ false      │
+└─────────┴────────────────────┴──────────────┴────────┴───────────┴─────────────┴────────────┴────────┴───────┴─────┴────────────┴────────────┘
+Completed 3/3 · mean recall 100% · mean forbidden files 0.00 · validated 0/3
+
+Saved eval/results/tasks-ollama-qwen2.5_7b-instruct-2026-10-26T17-54-59-952Z.json
+eval exit=0

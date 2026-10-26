@@ -1,28 +1,47 @@
 {
-  "name": "codex-cli",
-  "version": "1.0.0",
-  "description": "A simplified AI project planning agent.",
+  "name": "xplan",
+  "version": "2.0.0",
+  "description": "Plan code changes before making them: Creator \u2192 Planner \u2192 Reviewer with Gemini or local Ollama models.",
   "type": "module",
   "main": "dist/main.js",
-  "scripts": {
-    "start": "npx --package=typescript tsc && node dist/main.js",
-    "build": "npx --package=typescript tsc"
+  "bin": {
+    "xplan": "dist/main.js"
   },
-  "keywords": [],
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "clean": "node -e \"fs.rmSync('dist',{recursive:true,force:true});fs.rmSync('build-test',{recursive:true,force:true})\"",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json --noEmit",
+    "start": "npm run build && node dist/main.js",
+    "test": "tsc -p tsconfig.test.json && node --test \"build-test/tests/**/*.test.js\"",
+    "eval": "npm run build && node eval/run-eval.mjs",
+    "check": "npm run typecheck && npm test",
+    "coverage": "tsc -p tsconfig.test.json && node --test --experimental-test-coverage --test-coverage-include=\"build-test/src/**\" --test-coverage-exclude=\"build-test/src/{main,interactive}.js\" \"build-test/tests/**/*.test.js\"",
+    "eval:retrieval": "npm run build && node eval/run-eval.mjs --retrieval-only --min-recall 0.9 && node eval/run-eval.mjs --tasks eval/tasks-xplan.json --retrieval-only --min-recall 0.9"
+  },
+  "keywords": [
+    "cli",
+    "planning",
+    "llm",
+    "gemini",
+    "ollama",
+    "code-review"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@google/genai": "^0.3.0",
-    "@google/generative-ai": "^0.24.1",
     "chalk": "^5.3.0",
     "dotenv": "^16.4.5",
-    "fs-extra": "^11.2.0",
-    "fuse.js": "^7.0.0",
-    "glob": "^10.3.10",
-    "typescript": "^5.5.3"
+    "minimatch": "^10.2.6",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@types/fs-extra": "^11.0.4",
-    "@types/node": "^20.14.9"
+    "@types/node": "^22.20.5",
+    "typescript": "^5.9.3"
   }
 }

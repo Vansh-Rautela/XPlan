@@ -1,0 +1,12 @@
+{
+  "name": "sample-app",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "node dist/server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

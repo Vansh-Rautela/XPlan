@@ -1,0 +1,55 @@
+{
+  "description": "Retrieval benchmark on XPlan's own source (a real ~40-file TypeScript codebase). Expected files are the ones a maintainer would have to change.",
+  "repo": ".",
+  "ignore": ["tests/fixtures/**", "eval/**"],
+  "tasks": [
+    {
+      "id": "openai-provider",
+      "goal": "Add an OpenAI-compatible chat completions provider selectable with --provider openai",
+      "expected": ["src/llm/index.ts", "src/config.ts", "src/llm/types.ts"],
+      "forbidden": ["src/repo/ignore.ts", "src/plan/validate.ts"]
+    },
+    {
+      "id": "nested-gitignore",
+      "goal": "Respect .gitignore files in subdirectories, not only the root one, when indexing",
+      "expected": ["src/repo/ignore.ts", "src/repo/indexer.ts"],
+      "forbidden": ["src/llm/gemini.ts", "src/plan/render.ts"]
+    },
+    {
+      "id": "yaml-output",
+      "goal": "Add a YAML output format for the plan command next to markdown and json",
+      "expected": ["src/plan/render.ts", "src/cli.ts"],
+      "forbidden": ["src/repo/retrieval.ts", "src/llm/http.ts"]
+    },
+    {
+      "id": "stripe-redaction",
+      "goal": "Also redact Stripe secret keys (sk_live_ and rk_live_) from prompts and logs",
+      "expected": ["src/redact.ts"],
+      "forbidden": ["src/pipeline.ts", "src/repo/symbols.ts"]
+    },
+    {
+      "id": "max-llm-calls",
+      "goal": "Add a --max-llm-calls option that aborts the planning run when the number of model calls exceeds a budget",
+      "expected": ["src/pipeline.ts", "src/cli.ts", "src/config.ts"],
+      "forbidden": ["src/repo/ignore.ts", "src/redact.ts"]
+    },
+    {
+      "id": "reviewer-model",
+      "goal": "Allow the reviewer stage to use a different model than the planner via --reviewer-model",
+      "expected": ["src/pipeline.ts", "src/config.ts", "src/agents/reviewer.ts"],
+      "forbidden": ["src/repo/safety.ts", "src/repo/symbols.ts"]
+    },
+    {
+      "id": "retry-jitter",
+      "goal": "Make the retry backoff for rate limited HTTP requests configurable and cap the total retry time",
+      "expected": ["src/llm/http.ts"],
+      "forbidden": ["src/plan/render.ts", "src/repo/indexer.ts"]
+    },
+    {
+      "id": "kotlin-imports",
+      "goal": "Resolve Go and Kotlin imports when building the import graph for symbol extraction",
+      "expected": ["src/repo/symbols.ts"],
+      "forbidden": ["src/llm/ollama.ts", "src/cli.ts"]
+    }
+  ]
+}

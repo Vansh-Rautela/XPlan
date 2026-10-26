@@ -1,0 +1,115 @@
+{
+  "provider": "ollama/qwen2.5:7b-instruct",
+  "seed": 7,
+  "rows": [
+    {
+      "id": "email-validation",
+      "status": "unresolved",
+      "recall": 1,
+      "forbidden": 0,
+      "createOk": null,
+      "testsEveryTask": false,
+      "tasks": 3,
+      "rounds": 2,
+      "unresolved": 1,
+      "calls": 7,
+      "seconds": 354,
+      "files": [
+        "src/utils/validation.ts",
+        "src/routes/users.ts",
+        "tests/userService.test.ts"
+      ]
+    },
+    {
+      "id": "pagination",
+      "status": "validated",
+      "recall": 1,
+      "forbidden": 0,
+      "createOk": null,
+      "testsEveryTask": true,
+      "tasks": 2,
+      "rounds": 1,
+      "unresolved": 0,
+      "calls": 5,
+      "seconds": 163,
+      "files": [
+        "src/services/userService.ts",
+        "src/routes/users.ts"
+      ]
+    },
+    {
+      "id": "soft-delete",
+      "status": "unresolved",
+      "recall": 1,
+      "forbidden": 0,
+      "createOk": null,
+      "testsEveryTask": true,
+      "tasks": 4,
+      "rounds": 2,
+      "unresolved": 4,
+      "calls": 7,
+      "seconds": 469,
+      "files": [
+        "src/models/user.ts",
+        "src/db/client.ts",
+        "src/services/userService.ts",
+        "src/routes/users.ts"
+      ]
+    },
+    {
+      "id": "configurable-port-loglevel",
+      "status": "validated",
+      "recall": 1,
+      "forbidden": 0,
+      "createOk": null,
+      "testsEveryTask": true,
+      "tasks": 4,
+      "rounds": 2,
+      "unresolved": 0,
+      "calls": 7,
+      "seconds": 409,
+      "files": [
+        "src/config.ts",
+        "src/server.ts",
+        "src/middleware/requestLogger.ts",
+        "tests/userService.test.ts"
+      ]
+    },
+    {
+      "id": "rate-limiting",
+      "status": "validated",
+      "recall": 1,
+      "forbidden": 0,
+      "createOk": true,
+      "testsEveryTask": true,
+      "tasks": 3,
+      "rounds": 1,
+      "unresolved": 0,
+      "calls": 5,
+      "seconds": 196,
+      "files": [
+        "src/middleware/rateLimiter.ts",
+        "src/server.ts",
+        "src/routes/health.ts",
+        "src/routes/users.ts"
+      ]
+    },
+    {
+      "id": "health-db-status",
+      "status": "unresolved",
+      "recall": 1,
+      "forbidden": 0,
+      "createOk": null,
+      "testsEveryTask": true,
+      "tasks": 2,
+      "rounds": 2,
+      "unresolved": 2,
+      "calls": 7,
+      "seconds": 277,
+      "files": [
+        "src/services/userService.ts",
+        "src/routes/health.ts"
+      ]
+    }
+  ]
+}

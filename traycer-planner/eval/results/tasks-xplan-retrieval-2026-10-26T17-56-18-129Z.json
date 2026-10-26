@@ -1,0 +1,72 @@
+{
+  "provider": null,
+  "seed": 7,
+  "rows": [
+    {
+      "id": "openai-provider",
+      "recallInContext": 1,
+      "recallTop3": 1,
+      "contextFiles": 8,
+      "forbiddenInContext": 0,
+      "missed": []
+    },
+    {
+      "id": "nested-gitignore",
+      "recallInContext": 1,
+      "recallTop3": 0.5,
+      "contextFiles": 7,
+      "forbiddenInContext": 0,
+      "missed": []
+    },
+    {
+      "id": "yaml-output",
+      "recallInContext": 1,
+      "recallTop3": 0.5,
+      "contextFiles": 7,
+      "forbiddenInContext": 0,
+      "missed": []
+    },
+    {
+      "id": "stripe-redaction",
+      "recallInContext": 1,
+      "recallTop3": 1,
+      "contextFiles": 8,
+      "forbiddenInContext": 0,
+      "missed": []
+    },
+    {
+      "id": "max-llm-calls",
+      "recallInContext": 1,
+      "recallTop3": 0.6666666666666666,
+      "contextFiles": 7,
+      "forbiddenInContext": 0,
+      "missed": []
+    },
+    {
+      "id": "reviewer-model",
+      "recallInContext": 0.6666666666666666,
+      "recallTop3": 0.6666666666666666,
+      "contextFiles": 7,
+      "forbiddenInContext": 0,
+      "missed": [
+        "src/config.ts"
+      ]
+    },
+    {
+      "id": "retry-jitter",
+      "recallInContext": 1,
+      "recallTop3": 1,
+      "contextFiles": 8,
+      "forbiddenInContext": 0,
+      "missed": []
+    },
+    {
+      "id": "kotlin-imports",
+      "recallInContext": 1,
+      "recallTop3": 1,
+      "contextFiles": 6,
+      "forbiddenInContext": 0,
+      "missed": []
+    }
+  ]
+}
