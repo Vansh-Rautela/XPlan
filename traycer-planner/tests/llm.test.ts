@@ -8,7 +8,7 @@ import { backoffDelay, parseRetryAfter, requestJson, type FetchLike } from '../s
 import { normalizeOllamaHost, OllamaProvider } from '../src/llm/ollama.js';
 import { extractJson, generateStructured, toModelSchema } from '../src/llm/structured.js';
 import { redactSecrets } from '../src/redact.js';
-import { fakeFetch, jsonResponse, ndjsonResponse, networkError, noSleep, scriptedProvider } from './helpers.js';
+import { fakeFetch, jsonResponse, ndjsonResponse, networkError, noSleep, scriptedProvider, withEventLoopAlive } from './helpers.js';
 
 const FAKE_KEY = 'AIzaSyD-FAKE-KEY-0123456789abcdefghijklm';
 
@@ -57,10 +57,10 @@ describe('requestJson', () => {
             init.signal!.addEventListener('abort', () => reject(init.signal!.reason));
         });
         let calls = 0;
-        await assert.rejects(
+        await withEventLoopAlive(() => assert.rejects(
             requestJson('GET', 'http://x', { ...base, timeoutMs: 20, fetchImpl: (u, i) => { calls++; return hang(u, i); } }),
             (e: ProviderError) => e.kind === 'timeout' && !!e.hint,
-        );
+        ));
         assert.equal(calls, 1);
     });
 
@@ -78,7 +78,7 @@ describe('requestJson', () => {
                 init.signal!.addEventListener('abort', () => controller.error(init.signal!.reason));
             },
         }), { status: 200 });
-        await assert.rejects(requestJson('GET', 'http://x', { ...base, timeoutMs: 30, fetchImpl }), (e: ProviderError) => e.kind === 'timeout');
+        await withEventLoopAlive(() => assert.rejects(requestJson('GET', 'http://x', { ...base, timeoutMs: 30, fetchImpl }), (e: ProviderError) => e.kind === 'timeout'));
     });
 
     test('user cancellation surfaces as aborted', async () => {

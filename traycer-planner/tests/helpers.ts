@@ -159,3 +159,17 @@ export function networkError(code: string): Error {
 }
 
 export const noSleep = async () => {};
+
+/**
+ * Keeps the event loop alive while a simulated request hangs. A real fetch holds a socket open;
+ * a fake one does not, and on Node 22 the test runner cancels a test whose only pending work is
+ * an (unref'd) AbortSignal.timeout timer.
+ */
+export async function withEventLoopAlive<T>(fn: () => Promise<T>): Promise<T> {
+    const timer = setInterval(() => {}, 1000);
+    try {
+        return await fn();
+    } finally {
+        clearInterval(timer);
+    }
+}
